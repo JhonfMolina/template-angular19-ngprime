@@ -1,0 +1,53 @@
+<div class="container">
+  <p-toolbar styleClass="shadow-2 mb-5">
+    <ng-template #start>
+      <div class="flex align-items-center">
+        <img
+          src="assets/logo/logo-nombre-blanco-512px.png"
+          class="w-12rem"
+          alt=""
+        />
+      </div>
+    </ng-template>
+
+    <ng-template #end>
+      <div class="flex align-items-center gap-2">
+        <app-button
+          [text]="'Request XXX'"
+          [appearance]="'rounded'"
+          [variant]="'outlined'"
+          [color]="'secondary'"
+          [icon]="'right-arrow-circle'"
+        ></app-button>
+
+        <app-button
+          [text]="'Request Access'"
+          [appearance]="'rounded'"
+          [variant]="'outlined'"
+          [color]="'primary'"
+          [icon]="'right-arrow-circle'"
+          (onClick)="holaMundo()"
+          [disabled]="!sid"
+          [loading]="true"
+        ></app-button>
+      </div>
+    </ng-template>
+  </p-toolbar>
+
+  <app-table
+    [data]="users"
+    [columns]="columns"
+    [rows]="rows"
+    [first]="first"
+    [totalRecords]="totalRecords"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (pageChange)="onPageChange($event)"
+  ></app-table>
+
+  <p-toast
+    [breakpoints]="{ '920px': { width: '90%', right: '5%', left: '5%' } }"
+  ></p-toast>
+</div>
+
+<app-dynamic-form [config]="formConfig"></app-dynamic-form>

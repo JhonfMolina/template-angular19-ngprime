@@ -1,0 +1,74 @@
+<form class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="{{ field.column }}" *ngFor="let field of config">
+    <p-floatlabel variant="on" *ngIf="field.type === 'text'">
+      <p-iconfield>
+        <input
+          pInputText
+          [id]="field.on_label"
+          [type]="field.type"
+          [formControlName]="field.name"
+          [placeholder]="field.placeholder"
+          [size]="field.size"
+        />
+        <p-inputicon class="bx bxs-{{ field.icon }}" />
+      </p-iconfield>
+      <label [for]="field.on_label" [for]="field.name">{{ field.label }}</label>
+    </p-floatlabel>
+
+    <!-- <p-floatlabel variant="on">
+      <p-iconfield>
+        <input
+          pInputText
+          *ngIf="field.type === 'email'"
+          [id]="field.on_label"
+          [type]="field.type"
+          [formControlName]="field.name"
+          [placeholder]="field.placeholder"
+          [size]="field.size"
+        />
+        <p-inputicon class="bx bxs-{{ field.icon }}" />
+      </p-iconfield>
+      <label [for]="field.on_label" [for]="field.name">{{ field.label }}</label>
+    </p-floatlabel> -->
+
+    <!-- <input
+      *ngIf="field.type === 'password'"
+      [id]="field.name"
+      [type]="field.type"
+      [formControlName]="field.name"
+      [placeholder]="field.placeholder"
+    />
+    <textarea
+      *ngIf="field.type === 'textarea'"
+      [id]="field.name"
+      [formControlName]="field.name"
+      [placeholder]="field.placeholder"
+    ></textarea>
+    <select
+      *ngIf="field.type === 'select'"
+      [id]="field.name"
+      [formControlName]="field.name"
+    >
+      <option *ngFor="let option of field.options" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select> -->
+
+    <div *ngIf="form.get(field.name)!.invalid && form.get(field.name).touched">
+      <small *ngIf="form.get(field.name)!.errors.required"
+        >This field is required</small
+      >
+      <small *ngIf="form.get(field.name)!.errors.email"
+        >Invalid email address</small
+      >
+      <small *ngIf="form.get(field.name)!.errors.minLength"
+        >Minimum length is {{ field.validators.minLength }}</small
+      >
+      <small *ngIf="form.get(field.name)!.errors.maxLength"
+        >Maximum length is {{ field.validators.maxLength }}</small
+      >
+      <small *ngIf="form.get(field.name)!.errors.pattern">Invalid format</small>
+    </div>
+  </div>
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

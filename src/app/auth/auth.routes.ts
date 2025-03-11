@@ -1,7 +1,19 @@
-import { Routes } from "@angular/router";
+import { Routes } from '@angular/router';
 
 export default [
-  { path: 'login', loadComponent: ()=> import('./login/login.component'), title: 'Inicio de sesion'},
-  { path: 'forget-password', loadComponent: ()=> import('./forget-password/forget-password.component'), title: 'Recuperar clave'},
-  { path:'', redirectTo: 'login', pathMatch:'full'}
-] as Routes
+  {
+    path: 'sign-in',
+    loadComponent: () => import('./login/login.component'),
+    title: 'Sign in',
+  },
+  {
+    path: 'sign-up',
+    loadComponent: () => import('./register/register.component'),
+    title: 'Sign up',
+  },
+  {
+    path: 'forget-password',
+    loadComponent: () => import('./forget-password/forget-password.component'),
+    title: 'Recover password',
+  },
+] as Routes;
