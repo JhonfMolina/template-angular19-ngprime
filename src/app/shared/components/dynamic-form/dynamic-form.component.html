@@ -1,74 +1,153 @@
-<form class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="grid" [formGroup]="form">
   <div class="{{ field.column }}" *ngFor="let field of config">
-    <p-floatlabel variant="on" *ngIf="field.type === 'text'">
-      <p-iconfield>
-        <input
-          pInputText
-          [id]="field.on_label"
-          [type]="field.type"
+    <div *ngIf="field.type === 'text'">
+      <p-floatlabel variant="on">
+        <p-iconfield>
+          <input
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                form.get(field.name).invalid &&
+                (form.get(field.name).dirty || form.get(field.name).touched)
+            }"
+            pInputText
+            [id]="field.on_label"
+            [type]="field.type"
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+          />
+          <p-inputicon class="bx bxs-{{ field.icon }}" />
+        </p-iconfield>
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+      <app-validators-form
+        [form]="form.controls"
+        [field]="field.name"
+      ></app-validators-form>
+    </div>
+
+    <div *ngIf="field.type === 'email'">
+      <p-floatlabel variant="on">
+        <p-iconfield>
+          <input
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                form.get(field.name).invalid &&
+                (form.get(field.name).dirty || form.get(field.name).touched)
+            }"
+            pInputText
+            [id]="field.on_label"
+            [type]="field.type"
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+          />
+          <p-inputicon class="bx bxs-{{ field.icon }}" />
+        </p-iconfield>
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+      <app-validators-form
+        [form]="form.controls"
+        [field]="field.name"
+      ></app-validators-form>
+    </div>
+
+    <div *ngIf="field.type === 'password'">
+      <p-floatlabel variant="on">
+        <p-iconfield>
+          <input
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                form.get(field.name).invalid &&
+                (form.get(field.name).dirty || form.get(field.name).touched)
+            }"
+            pInputText
+            [id]="field.on_label"
+            [type]="field.type"
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+          />
+          <p-inputicon class="bx bxs-{{ field.icon }}" />
+        </p-iconfield>
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+      <app-validators-form
+        [form]="form.controls"
+        [field]="field.name"
+      ></app-validators-form>
+    </div>
+
+    <div *ngIf="field.type === 'textarea'">
+      <p-floatlabel variant="on">
+        <textarea
+          [ngClass]="{
+            'ng-invalid ng-dirty':
+              form.get(field.name).invalid &&
+              (form.get(field.name).dirty || form.get(field.name).touched)
+          }"
+          pTextarea
+          [id]="field.name"
           [formControlName]="field.name"
-          [placeholder]="field.placeholder"
-          [size]="field.size"
-        />
-        <p-inputicon class="bx bxs-{{ field.icon }}" />
-      </p-iconfield>
-      <label [for]="field.on_label" [for]="field.name">{{ field.label }}</label>
-    </p-floatlabel>
+          rows="5"
+          cols="30"
+          style="resize: none"
+          class="w-full h-full"
+        ></textarea>
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+      <app-validators-form
+        [form]="form.controls"
+        [field]="field.name"
+      ></app-validators-form>
+    </div>
 
-    <!-- <p-floatlabel variant="on">
-      <p-iconfield>
-        <input
-          pInputText
-          *ngIf="field.type === 'email'"
+    <div *ngIf="field.type === 'select'">
+      <p-floatlabel variant="on">
+        <p-select
+          [ngClass]="{
+            'ng-invalid ng-dirty':
+              form.get(field.name).invalid &&
+              (form.get(field.name).dirty || form.get(field.name).touched)
+          }"
+          [(ngModel)]="field.selectedItems"
+          [options]="field.options"
           [id]="field.on_label"
-          [type]="field.type"
           [formControlName]="field.name"
+          [optionLabel]="field.name"
+          [filter]="field.filter"
+          [filterBy]="field.filterBy"
+          [showClear]="field.showClear"
           [placeholder]="field.placeholder"
-          [size]="field.size"
-        />
-        <p-inputicon class="bx bxs-{{ field.icon }}" />
-      </p-iconfield>
-      <label [for]="field.on_label" [for]="field.name">{{ field.label }}</label>
-    </p-floatlabel> -->
-
-    <!-- <input
-      *ngIf="field.type === 'password'"
-      [id]="field.name"
-      [type]="field.type"
-      [formControlName]="field.name"
-      [placeholder]="field.placeholder"
-    />
-    <textarea
-      *ngIf="field.type === 'textarea'"
-      [id]="field.name"
-      [formControlName]="field.name"
-      [placeholder]="field.placeholder"
-    ></textarea>
-    <select
-      *ngIf="field.type === 'select'"
-      [id]="field.name"
-      [formControlName]="field.name"
-    >
-      <option *ngFor="let option of field.options" [value]="option.value">
-        {{ option.label }}
-      </option>
-    </select> -->
-
-    <div *ngIf="form.get(field.name)!.invalid && form.get(field.name).touched">
-      <small *ngIf="form.get(field.name)!.errors.required"
-        >This field is required</small
-      >
-      <small *ngIf="form.get(field.name)!.errors.email"
-        >Invalid email address</small
-      >
-      <small *ngIf="form.get(field.name)!.errors.minLength"
-        >Minimum length is {{ field.validators.minLength }}</small
-      >
-      <small *ngIf="form.get(field.name)!.errors.maxLength"
-        >Maximum length is {{ field.validators.maxLength }}</small
-      >
-      <small *ngIf="form.get(field.name)!.errors.pattern">Invalid format</small>
+          class="w-full"
+        >
+          <ng-template #selectedItem let-selectedOption>
+            <div>{{ selectedOption.name }}</div>
+          </ng-template>
+          <ng-template let-country #item>
+            <div>{{ country.name }}</div>
+          </ng-template>
+        </p-select>
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+      <app-validators-form
+        [form]="form.controls"
+        [field]="field.name"
+      ></app-validators-form>
     </div>
   </div>
-  <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>
+<div class="flex justify-content-center align-items-center gap-2">
+  <app-button
+    [text]="'Cancel'"
+    [appearance]="'rounded'"
+    [variant]="'outlined'"
+    [color]="'danger'"
+    [icon]="'x-circle'"
+  ></app-button>
+  <app-button
+    [text]="'Save'"
+    [appearance]="'rounded'"
+    [color]="'primary'"
+    [icon]="'save'"
+    (onClick)="onSubmit()"
+    [disabled]="form.invalid"
+  ></app-button>
+</div>

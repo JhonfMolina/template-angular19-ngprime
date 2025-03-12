@@ -9,6 +9,10 @@ import { DataService } from '../core/services/util/data.service';
 import { ToastModule } from 'primeng/toast';
 import { NotificationService } from '../core/services/util/notificacion.service';
 import { DynamicFormComponent } from '../shared/components/dynamic-form/dynamic-form.component';
+import { SelectModule } from 'primeng/select';
+import { FormsModule } from '@angular/forms';
+import { DynamicForm } from '../core/interfaces/util/dynamic-form.interface';
+import { CardModule } from 'primeng/card';
 
 interface PageEvent {
   first: number;
@@ -28,6 +32,9 @@ interface PageEvent {
     TableComponent,
     ToastModule,
     DynamicFormComponent,
+    FormsModule,
+    SelectModule,
+    CardModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -42,73 +49,85 @@ export default class HomeComponent {
     { field: 'gender', header: 'Gender' },
   ];
 
-  formConfig: any[] = [
+  formConfig: DynamicForm[] = [
     {
       type: 'text',
       icon: 'user',
       name: 'username',
       label: 'Username',
       on_label: 'Username',
-      size: 'small',
       placeholder: '',
       validators: {
         required: true,
         minLength: 3,
         maxLength: 20,
       },
-      column: 'col-12 md:col-2',
-      styleClass: 'mb-5',
+      column: 'col-12 md:col-4',
     },
-    // {
-    //   type: 'email',
-    //   name: 'email',
-    //   label: 'Email',
-    //   on_label: 'Username',
-    //   size: 'small',
-    //   placeholder: '',
-    //   validators: {
-    //     required: true,
-    //     email: true,
-    //   },
-    // },
-    // {
-    //   type: 'password',
-    //   name: 'password',
-    //   label: 'Password',
-    //   on_label: 'Username',
-    //   size: 'small',
-    //   placeholder: '',
-    //   validators: {
-    //     required: true,
-    //     minLength: 6,
-    //   },
-    // },
-    // {
-    //   type: 'textarea',
-    //   name: 'bio',
-    //   label: 'Bio',
-    //   on_label: 'Username',
-    //   size: 'small',
-    //   placeholder: '',
-    //   validators: {
-    //     maxLength: 200,
-    //   },
-    // },
-    // {
-    //   type: 'select',
-    //   name: 'gender',
-    //   label: 'Gender',
-    //   on_label: 'Username',
-    //   size: 'small',
-    //   options: [
-    //     { label: 'Male', value: 'male' },
-    //     { label: 'Female', value: 'female' },
-    //     { label: 'Other', value: 'other' },
-    //   ],
-    //   validators: {
-    //     required: true,
-    //   },
-    // },
+    {
+      type: 'email',
+      icon: 'envelope',
+      name: 'email',
+      label: 'Email',
+      on_label: 'Email',
+      placeholder: '',
+      validators: {
+        required: true,
+        email: true,
+      },
+      column: 'col-12 md:col-4',
+    },
+    {
+      type: 'password',
+      icon: 'key',
+      name: 'password',
+      label: 'Password',
+      on_label: 'password',
+      placeholder: '',
+      validators: {
+        required: true,
+        minLength: 6,
+      },
+      column: 'col-12 md:col-4',
+    },
+    {
+      type: 'textarea',
+      name: 'bio',
+      label: 'bio',
+      on_label: 'bio',
+      placeholder: '',
+      validators: {
+        maxLength: 200,
+      },
+      column: 'col-12 md:col-8',
+    },
+    {
+      type: 'select',
+      name: 'country',
+      label: 'Country',
+      on_label: 'country',
+      placeholder: '',
+      filter: true,
+      filterBy: 'name',
+      showClear: true,
+      options: [
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' },
+      ],
+      selectedItems: [],
+      validators: {
+        required: true,
+      },
+      column: 'col-12 md:col-4',
+    },
   ];
 
   totalRecords: number = 0;
@@ -150,24 +169,7 @@ export default class HomeComponent {
     this.loadUsers();
   }
 
-  sid = 'existe';
-  holaMundo() {
-    console.log('holaMundo');
-  }
-
-  showSuccess(): void {
-    this.notificationService.showSuccess('Code 200', 'Content create success.');
-  }
-
-  showError(): void {
-    this.notificationService.showError('Error', 'Message Content');
-  }
-
-  showInfo(): void {
-    this.notificationService.showInfo('Info', 'Message Content');
-  }
-
-  showWarn(): void {
-    this.notificationService.showWarn('Warning', 'Message Content');
+  post(dataForm: any): void {
+    console.log(dataForm);
   }
 }

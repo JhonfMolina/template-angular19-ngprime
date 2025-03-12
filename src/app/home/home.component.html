@@ -26,13 +26,18 @@
           [variant]="'outlined'"
           [color]="'primary'"
           [icon]="'right-arrow-circle'"
-          (onClick)="holaMundo()"
-          [disabled]="!sid"
           [loading]="true"
         ></app-button>
       </div>
     </ng-template>
   </p-toolbar>
+
+  <p-card header="Dynamic Form" styleClass="mb-5">
+    <app-dynamic-form
+      [config]="formConfig"
+      (onClick)="post($event)"
+    ></app-dynamic-form>
+  </p-card>
 
   <app-table
     [data]="users"
@@ -49,5 +54,3 @@
     [breakpoints]="{ '920px': { width: '90%', right: '5%', left: '5%' } }"
   ></p-toast>
 </div>
-
-<app-dynamic-form [config]="formConfig"></app-dynamic-form>
