@@ -10,10 +10,22 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(page: number, size: number): Observable<any> {
+  getList(page: number, size: number): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('count', size.toString());
     return this.http.get<any>(this.apiUrl, { params });
+  }
+
+  getId(name: string, status: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/?name=${name}&status=${status}`);
+  }
+
+  post(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, data);
+  }
+
+  put(id: number, data: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, data);
   }
 }

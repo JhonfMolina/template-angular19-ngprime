@@ -9,7 +9,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { CustomTitleStrategy } from './core/services/util/custom-title-strategy.service';
 import MyPreset from './theme/mypresent';
 import { MessageService } from 'primeng/api';
-import { FormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [

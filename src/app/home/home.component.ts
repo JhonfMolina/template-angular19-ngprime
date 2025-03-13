@@ -13,6 +13,7 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { DynamicForm } from '../core/interfaces/util/dynamic-form.interface';
 import { CardModule } from 'primeng/card';
+import { SkeletonComponent } from '../shared/components/skeleton/skeleton.component';
 
 interface PageEvent {
   first: number;
@@ -35,12 +36,15 @@ interface PageEvent {
     FormsModule,
     SelectModule,
     CardModule,
+    SkeletonComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export default class HomeComponent {
   users: any[] = [];
+
+  toggle = false;
 
   columns: any[] = [
     { field: 'id', header: 'ID' },
@@ -50,6 +54,20 @@ export default class HomeComponent {
   ];
 
   formConfig: DynamicForm[] = [
+    {
+      type: 'text',
+      icon: 'id-card',
+      name: 'id',
+      label: 'ID',
+      on_label: 'id',
+      placeholder: '',
+      validators: {
+        required: true,
+        minLength: 3,
+        maxLength: 20,
+      },
+      column: 'col-12 md:col-2 lg:col-12',
+    },
     {
       type: 'text',
       icon: 'user',
@@ -62,7 +80,7 @@ export default class HomeComponent {
         minLength: 3,
         maxLength: 20,
       },
-      column: 'col-12 md:col-4',
+      column: 'col-12 md:col-4 lg:col-12',
     },
     {
       type: 'email',
@@ -75,7 +93,7 @@ export default class HomeComponent {
         required: true,
         email: true,
       },
-      column: 'col-12 md:col-4',
+      column: 'col-12 md:col-4 lg:col-12',
     },
     {
       type: 'password',
@@ -88,18 +106,7 @@ export default class HomeComponent {
         required: true,
         minLength: 6,
       },
-      column: 'col-12 md:col-4',
-    },
-    {
-      type: 'textarea',
-      name: 'bio',
-      label: 'bio',
-      on_label: 'bio',
-      placeholder: '',
-      validators: {
-        maxLength: 200,
-      },
-      column: 'col-12 md:col-8',
+      column: 'col-12 md:col-2 lg:col-12',
     },
     {
       type: 'select',
@@ -126,7 +133,18 @@ export default class HomeComponent {
       validators: {
         required: true,
       },
-      column: 'col-12 md:col-4',
+      column: 'col-12 md:col-4 lg:col-12',
+    },
+    {
+      type: 'textarea',
+      name: 'bio',
+      label: 'bio',
+      on_label: 'bio',
+      placeholder: '',
+      validators: {
+        maxLength: 200,
+      },
+      column: 'col-12 md:col-8 lg:col-12',
     },
   ];
 
@@ -140,6 +158,18 @@ export default class HomeComponent {
     private notificationService: NotificationService
   ) {}
 
+  toogleDarkMode(): void {
+    this.toggle = !this.toggle;
+    const element = document.querySelector('html');
+    if (this.toggle) {
+      element!.classList.add('my-app-dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      element!.classList.remove('my-app-dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
   onEdit(rowData: any): void {
     console.log('Edit:', rowData);
   }
@@ -151,11 +181,11 @@ export default class HomeComponent {
   onPageChange(event: PageEvent): void {
     this.page = event.page + 1;
     this.rows = event.rows;
-    this.loadUsers();
+    this.getList();
   }
 
-  loadUsers(): void {
-    this.dataService.getUsers(this.page, this.rows).subscribe((data) => {
+  getList(): void {
+    this.dataService.getList(this.page, this.rows).subscribe((data) => {
       this.users = data.results;
       this.totalRecords = data.info.count;
       this.notificationService.showSuccess(
@@ -165,8 +195,26 @@ export default class HomeComponent {
     });
   }
 
+  get(filterValue?: string): void {
+    if (filterValue) {
+      this.dataService.getId(filterValue, 'Alive').subscribe((data) => {
+        console.log(filterValue);
+        if (data && data.results) {
+          this.users = data.results;
+        } else {
+          this.getList();
+        }
+      });
+    }
+  }
+
   ngOnInit(): void {
-    this.loadUsers();
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      this.toggle = true;
+      document.querySelector('html')!.classList.add('my-app-dark');
+    }
+    this.getList();
   }
 
   post(dataForm: any): void {

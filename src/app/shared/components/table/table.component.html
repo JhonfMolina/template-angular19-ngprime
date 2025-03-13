@@ -1,9 +1,26 @@
 <p-card styleClass="shadow-2">
   <p-table
+    #dt2
     [value]="data"
     [tableStyle]="{ 'min-width': '50rem' }"
     [size]="'small'"
+    [globalFilterFields]="filterColumn"
   >
+    <ng-template #caption>
+      <div class="flex justify-content-end mb-3">
+        <p-iconfield iconPosition="left" class="col-12 md:col-4">
+          <input
+            pInputText
+            type="text"
+            (input)="applyFilterGlobal($event)"
+            placeholder="Search keyword"
+          />
+          <p-inputicon>
+            <i class="bx bx-search"></i>
+          </p-inputicon>
+        </p-iconfield>
+      </div>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th *ngFor="let col of columns">{{ col.header }}</th>

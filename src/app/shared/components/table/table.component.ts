@@ -4,6 +4,10 @@ import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import ButtonComponent from '../button/button.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 @Component({
   selector: 'app-table',
@@ -13,6 +17,10 @@ import { PaginatorModule } from 'primeng/paginator';
     CardModule,
     PaginatorModule,
     CommonModule,
+    InputTextModule,
+    FormsModule,
+    IconFieldModule,
+    InputIconModule,
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
@@ -26,6 +34,10 @@ export class TableComponent {
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
   @Output() pageChange = new EventEmitter<any>();
+  @Output() filtered = new EventEmitter<any>();
+
+  filteredData: any[] = [];
+  filterColumn: string[] = [];
 
   onEdit(rowData: any): void {
     this.edit.emit(rowData);
@@ -37,5 +49,14 @@ export class TableComponent {
 
   onPageChange(event: any): void {
     this.pageChange.emit(event);
+  }
+
+  ngOnInit(): void {
+    this.filterColumn = this.columns.map((col) => col.field);
+  }
+
+  applyFilterGlobal(filter: any): void {
+    const filterValue = filter.target.value;
+    this.filtered.emit(filterValue);
   }
 }

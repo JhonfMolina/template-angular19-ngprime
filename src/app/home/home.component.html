@@ -2,11 +2,13 @@
   <p-toolbar styleClass="shadow-2 mb-5">
     <ng-template #start>
       <div class="flex align-items-center">
-        <img
-          src="assets/logo/logo-nombre-blanco-512px.png"
-          class="w-12rem"
-          alt=""
-        />
+        <app-button
+          [appearance]="'rounded'"
+          [variant]="'outlined'"
+          [color]="toggle ? 'success' : 'warn'"
+          [icon]="toggle ? 'moon' : 'sun'"
+          (click)="toogleDarkMode()"
+        ></app-button>
       </div>
     </ng-template>
 
@@ -31,26 +33,32 @@
       </div>
     </ng-template>
   </p-toolbar>
+  <div class="grid">
+    <div class="col-12 md:col-4">
+      <p-card header="Dynamic Form" styleClass="mb-5">
+        <app-dynamic-form
+          [config]="formConfig"
+          (onClick)="post($event)"
+        ></app-dynamic-form>
+      </p-card>
+      <app-skeleton [type]="'table'" [columns]="columns"></app-skeleton>
+    </div>
 
-  <p-card header="Dynamic Form" styleClass="mb-5">
-    <app-dynamic-form
-      [config]="formConfig"
-      (onClick)="post($event)"
-    ></app-dynamic-form>
-  </p-card>
-
-  <app-table
-    [data]="users"
-    [columns]="columns"
-    [rows]="rows"
-    [first]="first"
-    [totalRecords]="totalRecords"
-    (edit)="onEdit($event)"
-    (delete)="onDelete($event)"
-    (pageChange)="onPageChange($event)"
-  ></app-table>
-
-  <p-toast
-    [breakpoints]="{ '920px': { width: '90%', right: '5%', left: '5%' } }"
-  ></p-toast>
+    <div class="col-12 md:col-8">
+      <app-table
+        [data]="users"
+        [columns]="columns"
+        [rows]="rows"
+        [first]="first"
+        [totalRecords]="totalRecords"
+        (edit)="onEdit($event)"
+        (delete)="onDelete($event)"
+        (filtered)="get($event)"
+        (pageChange)="onPageChange($event)"
+      ></app-table>
+    </div>
+  </div>
 </div>
+<p-toast
+  [breakpoints]="{ '920px': { width: '90%', right: '5%', left: '5%' } }"
+></p-toast>
