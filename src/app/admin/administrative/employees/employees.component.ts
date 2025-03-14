@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-employees',
   imports: [],
   templateUrl: './employees.component.html',
-  styleUrl: './employees.component.scss'
 })
-export class EmployeesComponent {
-
-}
+export class EmployeesComponent {}

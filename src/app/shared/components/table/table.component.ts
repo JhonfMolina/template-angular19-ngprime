@@ -23,7 +23,6 @@ import { InputIconModule } from 'primeng/inputicon';
     InputIconModule,
   ],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.scss',
 })
 export class TableComponent {
   @Input() data: any[] = [];

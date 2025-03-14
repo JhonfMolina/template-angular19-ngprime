@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-erp',
   imports: [],
   templateUrl: './erp.component.html',
-  styleUrl: './erp.component.scss'
 })
-export class ErpComponent {
-
-}
+export class ErpComponent {}

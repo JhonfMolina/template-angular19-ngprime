@@ -30,7 +30,6 @@ import ButtonComponent from '../button/button.component';
     ButtonComponent,
   ],
   templateUrl: './dynamic-form.component.html',
-  styleUrl: './dynamic-form.component.scss',
 })
 export class DynamicFormComponent {
   @Output() onClick = new EventEmitter<any>();

@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-skeleton',
   imports: [Skeleton, TableModule, CardModule, CommonModule],
   templateUrl: './skeleton.component.html',
-  styleUrl: './skeleton.component.scss',
 })
 export class SkeletonComponent {
   @Input() type!: 'form' | 'card' | 'table' | 'list';
