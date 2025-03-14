@@ -1,18 +1,25 @@
 <div *ngIf="form">
   <div
     class="text-red-500"
-    *ngIf="(form[field].invalid && form[field].dirty) || form[field].touched"
+    *ngIf="
+      (form[field.name].invalid && form[field.name].dirty) ||
+      form[field.name].touched
+    "
   >
-    <small *ngIf="form[field].hasError('required')"
+    <small *ngIf="form[field.name].hasError('required')"
       >This field is required*</small
     >
-    <small *ngIf="form[field].hasError('email')">Invalid email address!</small>
-    <small *ngIf="form[field].hasError('pattern')">Invalid text entered!</small>
-    <small *ngIf="form[field].hasError('minlength')"
-      >Minimum length is {{ field.validators.minLength }}
+    <small *ngIf="form[field.name].hasError('email')"
+      >Invalid email address!</small
+    >
+    <small *ngIf="form[field.name].hasError('pattern')"
+      >Invalid text entered!</small
+    >
+    <small *ngIf="form[field.name].hasError('minlength')"
+      >Minimum length is {{ field.validators.minLength }}!
     </small>
-    <small *ngIf="form[field].hasError('maxlength')"
-      >Maximum length is {{ field.validators.maxLength }}</small
+    <small *ngIf="form[field.name].hasError('maxlength')"
+      >Maximum length is {{ field.validators.maxLength }}!</small
     >
   </div>
 </div>

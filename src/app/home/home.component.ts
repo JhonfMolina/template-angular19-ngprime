@@ -57,9 +57,9 @@ export default class HomeComponent {
     {
       type: 'text',
       icon: 'id-card',
-      name: 'id',
-      label: 'ID',
-      on_label: 'id',
+      name: 'dni',
+      label: 'DNI',
+      on_label: 'dni',
       placeholder: '',
       validators: {
         required: true,
@@ -73,7 +73,7 @@ export default class HomeComponent {
       icon: 'user',
       name: 'username',
       label: 'Username',
-      on_label: 'Username',
+      on_label: 'username',
       placeholder: '',
       validators: {
         required: true,

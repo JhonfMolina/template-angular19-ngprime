@@ -1,27 +1,134 @@
-# AsistenmedNgprime
+# template-angular19-ngprime
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+template-angular19-ngprime es un proyecto plantilla o base diseñado para iniciar desarrollos basados en el marco de desarrollo Angular 19 en conjunto con PrimeNG, PrimeFlex y la librería de iconos Boxicons. Este proyecto proporciona una estructura de directorio definida y componentes reutilizables para avanzar más rápido en los objetivos del proyecto.
 
-## Development server
+## Características
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Angular 19**: Utiliza la última versión de Angular para aprovechar las nuevas características y mejoras.
+- **PrimeNG**: Incluye PrimeNG para componentes de interfaz de usuario ricos y personalizables.
+- **PrimeFlex**: Utiliza PrimeFlex para un sistema de grillas flexible y utilidades CSS.
+- **Boxicons**: Incluye la librería de iconos Boxicons para una amplia variedad de iconos modernos y personalizables.
+- **Estructura de directorio definida**: Proporciona una estructura de directorio organizada para facilitar el desarrollo y mantenimiento del proyecto.
+- **Componentes reutilizables**: Incluye componentes reutilizables para acelerar el desarrollo y mantener la consistencia en la interfaz de usuario.
 
-## Code scaffolding
+## Estructura del Proyecto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+La estructura del proyecto está organizada de la siguiente manera:
 
-## Build
+Aquí tienes un archivo README.md con una descripción extendida para tu proyecto:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```markdown
+# template-angular19-ngprime
 
-## Running unit tests
+template-angular19-ngprime es un proyecto plantilla o base diseñado para iniciar desarrollos basados en el marco de desarrollo Angular 19 en conjunto con PrimeNG, PrimeFlex y la librería de iconos Boxicons. Este proyecto proporciona una estructura de directorio definida y componentes reutilizables para avanzar más rápido en los objetivos del proyecto.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Características
 
-## Running end-to-end tests
+- **Angular 19**: Utiliza la última versión de Angular para aprovechar las nuevas características y mejoras.
+- **PrimeNG**: Incluye PrimeNG para componentes de interfaz de usuario ricos y personalizables.
+- **PrimeFlex**: Utiliza PrimeFlex para un sistema de grillas flexible y utilidades CSS.
+- **Boxicons**: Incluye la librería de iconos Boxicons para una amplia variedad de iconos modernos y personalizables.
+- **Estructura de directorio definida**: Proporciona una estructura de directorio organizada para facilitar el desarrollo y mantenimiento del proyecto.
+- **Componentes reutilizables**: Incluye componentes reutilizables para acelerar el desarrollo y mantener la consistencia en la interfaz de usuario.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Estructura del Proyecto
 
-## Further help
+La estructura del proyecto está organizada de la siguiente manera:
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+template-angular19-ngprime/
+├── src/
+│ ├── app/
+│ │ ├── core/
+│ │ │ ├── services/
+│ │ │ │ └── util/
+│ │ │ │ └── data.service.ts
+│ │ │ └── interfaces/
+│ │ │ └── util/
+│ │ │ └── dynamic-form.interface.ts
+│ │ ├── shared/
+│ │ │ ├── components/
+│ │ │ │ ├── button/
+│ │ │ │ │ └── button.component.ts
+│ │ │ │ ├── dynamic-form/
+│ │ │ │ │ └── dynamic-form.component.ts
+│ │ │ │ ├── skeleton/
+│ │ │ │ │ └── skeleton.component.ts
+│ │ │ │ └── table/
+│ │ │ │ └── table.component.ts
+│ │ ├── home/
+│ │ │ ├── home.component.ts
+│ │ │ └── home.component.html
+│ │ └── app.config.ts
+│ ├── assets/
+│ ├── environments/
+│ ├── styles.scss
+│ └── index.html
+├── package.json
+└── README.md
+
+````
+
+## Instalación
+
+Para instalar y configurar el proyecto, sigue estos pasos:
+
+1. Clona el repositorio:
+
+   ```bash
+   git clone git@github.com:JhonfMolina/template-angular19-ngprime.git
+   cd template-angular19-ngprime
+````
+
+2. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Inicia el servidor de desarrollo:
+
+   ```bash
+   npm start
+   ```
+
+## Uso
+
+Este proyecto incluye varios componentes reutilizables y servicios que puedes utilizar para construir tu aplicación. Aquí hay una breve descripción de algunos de los componentes y servicios incluidos:
+
+### Componentes
+
+- **ButtonComponent**: Un componente de botón reutilizable con varias opciones de personalización.
+- **DynamicFormComponent**: Un componente de formulario dinámico que genera formularios basados en una configuración proporcionada.
+- **SkeletonComponent**: Un componente de esqueleto para mostrar mientras se cargan los datos.
+- **TableComponent**: Un componente de tabla con soporte para filtrado, paginación y acciones personalizadas.
+
+### Servicios
+
+- **DataService**: Un servicio para interactuar con la API y manejar las operaciones CRUD.
+- **NotificationService**: Un servicio para mostrar notificaciones de éxito, error y advertencia.
+
+## Contribución
+
+Si deseas contribuir a este proyecto, por favor sigue estos pasos:
+
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`).
+3. Realiza tus cambios y haz commit (`git commit -am 'Agrega nueva característica'`).
+4. Sube tus cambios a tu fork (`git push origin feature/nueva-caracteristica`).
+5. Abre un Pull Request en el repositorio original.
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para obtener más detalles.
+
+---
+
+¡Gracias por usar template-angular19-ngprime! Esperamos que este proyecto plantilla te ayude a iniciar tus desarrollos de manera rápida y eficiente.
+
+```
+
+### Resumen
+
+Este archivo README.md proporciona una descripción extendida del proyecto, incluyendo sus características, estructura del proyecto, instrucciones de instalación y uso, y cómo contribuir. Esto debería ayudar a los desarrolladores a entender rápidamente el propósito del proyecto y cómo empezar a trabajar con él.
+```

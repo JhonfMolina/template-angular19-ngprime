@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "asistenmed-ngprime": {
+    "template-angular19-ngprime": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/asistenmed-ngprime",
+            "outputPath": "dist/template-angular19-ngprime",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -81,10 +81,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "asistenmed-ngprime:build:production"
+              "buildTarget": "template-angular19-ngprime:build:production"
             },
             "development": {
-              "buildTarget": "asistenmed-ngprime:build:development"
+              "buildTarget": "template-angular19-ngprime:build:development"
             }
           },
           "defaultConfiguration": "development"
