@@ -21,8 +21,10 @@ import { ButtonModule } from 'primeng/button';
   imports: [ButtonModule],
 })
 export default class ButtonComponent {
-  @Input() styleClass!: string;
-  @Input() text!: string;
+  @Input() width!: string;
+  @Input() label!: 'Sign In' | 'Cancel' | 'Save' | 'Update' | 'Delete';
+  @Input() action!: string;
+  @Input() visible!: boolean;
   @Input() appearance!: 'base' | 'raised' | 'rounded' | 'text';
   @Input() variant!: 'outlined' | 'text';
   @Input() color!:

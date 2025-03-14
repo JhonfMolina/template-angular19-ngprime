@@ -33,19 +33,19 @@ import ButtonComponent from '../button/button.component';
 })
 export class DynamicFormComponent {
   @Output() onClick = new EventEmitter<any>();
-  @Input() config: DynamicForm[] = [];
+  @Input() formConfig: DynamicForm[] = [];
+  @Input() formBtnConfig: any[] = [];
   form: FormGroup | any;
 
   constructor(private formConfigService: FormConfigService) {}
 
   ngOnInit(): void {
-    this.form = this.formConfigService.createFormGroup(this.config);
+    this.form = this.formConfigService.createFormGroup(this.formConfig);
   }
 
-  onSubmit(): void {
+  onSubmit(action: string): void {
     if (this.form.valid) {
-      this.onClick.emit(this.form.value);
-      console.log('Form Submitted', this.form.value);
+      this.onClick.emit({ form: this.form.value, event: action });
     }
   }
 }

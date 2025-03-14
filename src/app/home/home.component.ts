@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { Toolbar } from 'primeng/toolbar';
 import { AvatarModule } from 'primeng/avatar';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import ButtonComponent from '../shared/components/button/button.component';
 import { TableComponent } from '../shared/components/table/table.component';
 import { DataService } from '../core/services/util/data.service';
@@ -155,8 +155,13 @@ export default class HomeComponent {
 
   constructor(
     private dataService: DataService,
+    private router: Router,
     private notificationService: NotificationService
   ) {}
+
+  onNavigate() {
+    this.router.navigate(['/auth/sign-in']);
+  }
 
   toogleDarkMode(): void {
     this.toggle = !this.toggle;

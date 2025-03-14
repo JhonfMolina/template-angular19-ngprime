@@ -1,5 +1,5 @@
 <form class="grid" [formGroup]="form">
-  <div class="{{ field.column }}" *ngFor="let field of config">
+  <div class="{{ field.column }}" *ngFor="let field of formConfig">
     <div *ngIf="field.type === 'text'">
       <p-floatlabel variant="on">
         <p-iconfield>
@@ -134,20 +134,23 @@
     </div>
   </div>
 </form>
-<div class="flex justify-content-center align-items-center gap-2">
+<div
+  class="mt-2 w-100"
+  [ngClass]="{
+    'flex justify-content-center align-items-center gap-2':
+      formBtnConfig.length > 1
+  }"
+>
   <app-button
-    [text]="'Cancel'"
-    [appearance]="'rounded'"
-    [variant]="'outlined'"
-    [color]="'danger'"
-    [icon]="'x-circle'"
-  ></app-button>
-  <app-button
-    [text]="'Save'"
-    [appearance]="'rounded'"
-    [color]="'primary'"
-    [icon]="'save'"
-    (onClick)="onSubmit()"
-    [disabled]="form.invalid"
+    *ngFor="let Btn of formBtnConfig"
+    [label]="Btn.label"
+    [appearance]="Btn.appearance"
+    [variant]="Btn.variant"
+    [width]="Btn.width"
+    [color]="Btn.color"
+    [icon]="Btn.icon"
+    (onClick)="onSubmit(Btn.action)"
+    [disabled]="Btn.disabled"
+    [loading]="Btn.loading"
   ></app-button>
 </div>

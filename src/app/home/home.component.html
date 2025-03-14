@@ -1,34 +1,32 @@
 <div class="container">
   <p-toolbar styleClass="shadow-2 mb-5">
     <ng-template #start>
-      <div class="flex align-items-center">
-        <app-button
-          [appearance]="'rounded'"
-          [variant]="'outlined'"
-          [color]="toggle ? 'success' : 'warn'"
-          [icon]="toggle ? 'moon' : 'sun'"
-          (click)="toogleDarkMode()"
-        ></app-button>
-      </div>
+      <img
+        src="assets/logo/logo-nombre-verde-512px.png"
+        alt=""
+        srcset=""
+        class="w-10rem"
+      />
     </ng-template>
 
     <ng-template #end>
       <div class="flex align-items-center gap-2">
-        <app-button
-          [text]="'Request XXX'"
-          [appearance]="'rounded'"
-          [variant]="'outlined'"
-          [color]="'secondary'"
-          [icon]="'right-arrow-circle'"
-        ></app-button>
+        <div class="flex align-items-center">
+          <app-button
+            [appearance]="'rounded'"
+            [variant]="'outlined'"
+            [color]="toggle ? 'success' : 'warn'"
+            [icon]="toggle ? 'moon' : 'sun'"
+            (click)="toogleDarkMode()"
+          ></app-button>
+        </div>
 
         <app-button
-          [text]="'Request Access'"
+          [label]="'Sign In'"
           [appearance]="'rounded'"
-          [variant]="'outlined'"
           [color]="'primary'"
-          [icon]="'right-arrow-circle'"
-          [loading]="true"
+          [icon]="'door-open bx-sm'"
+          (click)="onNavigate()"
         ></app-button>
       </div>
     </ng-template>
@@ -37,7 +35,7 @@
     <div class="col-12 md:col-4">
       <p-card header="Dynamic Form" styleClass="mb-5">
         <app-dynamic-form
-          [config]="formConfig"
+          [formConfig]="formConfig"
           (onClick)="post($event)"
         ></app-dynamic-form>
       </p-card>
