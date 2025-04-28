@@ -1,35 +1,44 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
-import { CommonModule } from '@angular/common';
 import ButtonComponent from '../button/button.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { CommonModule, TitleCasePipe } from '@angular/common';
+import { SkeletonComponent } from '../skeleton/skeleton.component';
+
+import { ButtonModule } from 'primeng/button';
+import { ActionButton } from '../../../core/interfaces/util/actions.interfaces';
+import { LoadingService } from '../../../core/services/util/loading.service';
 
 @Component({
   selector: 'app-table',
   imports: [
     TableModule,
     ButtonComponent,
+    ButtonModule,
     CardModule,
     PaginatorModule,
-    CommonModule,
     InputTextModule,
-    FormsModule,
     IconFieldModule,
     InputIconModule,
+    CommonModule,
+    TitleCasePipe,
+    SkeletonComponent,
   ],
   templateUrl: './table.component.html',
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
   @Input() data: any[] = [];
   @Input() columns: any[] = [];
+  @Input() titleList: string = '';
   @Input() totalRecords: number = 0;
   @Input() first: number = 0;
   @Input() rows: number = 0;
+  @Input() actions: ActionButton[] = [];
+  @Output() addRow = new EventEmitter<any>();
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
   @Output() pageChange = new EventEmitter<any>();
@@ -37,20 +46,30 @@ export class TableComponent {
 
   filteredData: any[] = [];
   filterColumn: string[] = [];
+  isLoading: boolean = true;
 
-  onEdit(rowData: any): void {
-    this.edit.emit(rowData);
+  constructor(private _loadingService: LoadingService) {}
+
+  onAddRow(): void {
+    this.addRow.emit();
   }
 
-  onDelete(rowData: any): void {
-    this.delete.emit(rowData);
-  }
+  // onEdit(rowData: any): void {
+  //   this.edit.emit(rowData);
+  // }
+
+  // onDelete(rowData: any): void {
+  //   this.delete.emit(rowData);
+  // }
 
   onPageChange(event: any): void {
     this.pageChange.emit(event);
   }
 
   ngOnInit(): void {
+    this._loadingService.loading$.subscribe((loading) => {
+      this.isLoading = loading;
+    });
     this.filterColumn = this.columns.map((col) => col.field);
   }
 

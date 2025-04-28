@@ -1,5 +1,55 @@
-<form class="grid" [formGroup]="form">
+<form class="grid align-items-center" [formGroup]="form">
   <div class="{{ field.column }}" *ngFor="let field of formConfig">
+    <div *ngIf="field.type === 'number'">
+      <p-floatlabel variant="on">
+        <p-iconfield>
+          <input
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                form.get(field.name).invalid &&
+                (form.get(field.name).dirty || form.get(field.name).touched)
+            }"
+            pInputText
+            [id]="field.on_label"
+            [type]="field.type"
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+          />
+          <p-inputicon class="bx bxs-{{ field.icon }}" />
+        </p-iconfield>
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+      <app-validators-form
+        [form]="form.controls"
+        [field]="field"
+      ></app-validators-form>
+    </div>
+
+    <div *ngIf="field.type === 'tel'">
+      <p-floatlabel variant="on">
+        <p-iconfield>
+          <input
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                form.get(field.name).invalid &&
+                (form.get(field.name).dirty || form.get(field.name).touched)
+            }"
+            pInputText
+            [id]="field.on_label"
+            [type]="field.type"
+            [formControlName]="field.name"
+            [placeholder]="field.placeholder"
+          />
+          <p-inputicon class="bx bxs-{{ field.icon }}" />
+        </p-iconfield>
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+      <app-validators-form
+        [form]="form.controls"
+        [field]="field"
+      ></app-validators-form>
+    </div>
+
     <div *ngIf="field.type === 'text'">
       <p-floatlabel variant="on">
         <p-iconfield>
@@ -102,6 +152,7 @@
     <div *ngIf="field.type === 'select'">
       <p-floatlabel variant="on">
         <p-select
+          size="small"
           [ngClass]="{
             'ng-invalid ng-dirty':
               form.get(field.name).invalid &&
@@ -116,13 +167,15 @@
           [filterBy]="field.filterBy"
           [showClear]="field.showClear"
           [placeholder]="field.placeholder"
+          optionValue="id"
           class="w-full"
+          (onChange)="onChange($event, field)"
         >
           <ng-template #selectedItem let-selectedOption>
-            <div>{{ selectedOption.name }}</div>
+            <div>{{ selectedOption.nombre }}</div>
           </ng-template>
-          <ng-template let-country #item>
-            <div>{{ country.name }}</div>
+          <ng-template let-data #item>
+            <div>{{ data.nombre }}</div>
           </ng-template>
         </p-select>
         <label [for]="field.on_label">{{ field.label }}</label>
@@ -131,6 +184,68 @@
         [form]="form.controls"
         [field]="field"
       ></app-validators-form>
+    </div>
+
+    <div *ngIf="field.type === 'multiselect'">
+      <p-floatlabel variant="on">
+        <p-multiselect
+          [ngClass]="{
+            'ng-invalid ng-dirty':
+              form.get(field.name).invalid &&
+              (form.get(field.name).dirty || form.get(field.name).touched)
+          }"
+          display="chip"
+          size="small"
+          [(ngModel)]="field.selectedItems"
+          [options]="field.options"
+          [id]="field.on_label"
+          [formControlName]="field.name"
+          [filter]="field.filter"
+          [filterBy]="field.filterBy"
+          [maxSelectedLabels]="4"
+          displaySelectedLabels="true"
+          [showClear]="field.showClear"
+          styleClass="w-full"
+          optionLabel="nombre"
+        >
+          <ng-template #selectedItems let-selectedItems>
+            <div>{{ selectedItems.nombre }}</div>
+          </ng-template>
+          <ng-template let-data #item>
+            <div>{{ data.nombre }}</div>
+          </ng-template>
+        </p-multiselect>
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+
+      <app-validators-form
+        [form]="form.controls"
+        [field]="field"
+      ></app-validators-form>
+    </div>
+
+    <div *ngIf="field.type === 'date'">
+      <p-floatlabel variant="on">
+        <p-datepicker
+          styleClass="w-full"
+          [id]="field.on_label"
+          [formControlName]="field.name"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          inputId="icondisplay"
+          dateFormat="yy-mm-dd"
+        />
+        <label [for]="field.on_label">{{ field.label }}</label>
+      </p-floatlabel>
+    </div>
+
+    <div *ngIf="field.type === 'checkbox' && field.visible">
+      <p-checkbox
+        [formControlName]="field.name"
+        [binary]="true"
+        inputId="{{ field.on_label }}"
+      />
+      <label [for]="field.on_label" class="ml-2">{{ field.label }}</label>
     </div>
   </div>
 </form>
@@ -141,16 +256,17 @@
       formBtnConfig.length > 1
   }"
 >
-  <app-button
-    *ngFor="let Btn of formBtnConfig"
-    [label]="Btn.label"
-    [appearance]="Btn.appearance"
-    [variant]="Btn.variant"
-    [width]="Btn.width"
-    [color]="Btn.color"
-    [icon]="Btn.icon"
-    (onClick)="onSubmit(Btn.action)"
-    [disabled]="Btn.disabled"
-    [loading]="Btn.loading"
-  ></app-button>
+  <div *ngFor="let Btn of formBtnConfig">
+    <app-button
+      [label]="Btn.label"
+      [variant]="Btn.variant"
+      [width]="Btn.width"
+      [color]="Btn.color"
+      [icon]="Btn.icon"
+      (onClick)="onSubmit()"
+      [disabled]="Btn.disabled"
+      [loading]="Btn.loading"
+      [permission]="Btn.permission"
+    ></app-button>
+  </div>
 </div>
