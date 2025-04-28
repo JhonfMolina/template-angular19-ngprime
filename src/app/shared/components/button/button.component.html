@@ -1,15 +1,14 @@
 <p-button
   [label]="label"
   [severity]="color"
-  [rounded]="appearance == 'rounded'"
-  [raised]="appearance == 'raised'"
   [variant]="variant"
-  icon="bx bxs-{{ icon }}"
+  [icon]="icon"
   (click)="handleButtonClick($event)"
   [attr.disabled]="disabled ? true : null"
   [attr.tabindex]="disabled ? -1 : null"
   styleClass="{{ width }}"
   [disabled]="disabled ? true : false"
   [loading]="loading"
+  *appHasPermission="permission"
 >
 </p-button>
